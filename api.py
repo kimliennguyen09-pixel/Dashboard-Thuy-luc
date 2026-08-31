@@ -176,3 +176,10 @@ def main():
 if __name__ == "__main__":
     main()
 
+import os
+
+port = int(os.environ.get("PORT", "8000"))
+server = HTTPServer(("0.0.0.0", port), Handler)
+
+print(f"Dashboard running on port {port}")
+server.serve_forever()
