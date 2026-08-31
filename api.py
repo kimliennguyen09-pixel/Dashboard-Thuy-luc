@@ -124,6 +124,7 @@ class DashboardHandler(SimpleHTTPRequestHandler):
         parsed = urlparse(self.path)
         if parsed.path == "/api/health":
             return self.send_json({"status": "ok", "records": len(NODES)})
+            
         if parsed.path == "/api/summary":
             return self.send_json(summary())
         if parsed.path == "/api/nodes":
@@ -172,14 +173,6 @@ def main():
     server.serve_forever()
 
 
-def main():
-    host = "0.0.0.0"
-    port = int(os.getenv("PORT", os.getenv("DASHBOARD_PORT", "8000")))
-
-    mimetypes.add_type("text/javascript", ".js")
-
-    server = ThreadingHTTPServer((host, port), DashboardHandler)
-
-    print(f"GeoAI Hydraulic Dashboard: http://{host}:{port}")
-    server.serve_forever()
+if __name__ == "__main__":
+    main()
 
