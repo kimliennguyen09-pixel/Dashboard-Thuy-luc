@@ -179,7 +179,7 @@ if __name__ == "__main__":
 
     server = ThreadingHTTPServer(
         (HOST, PORT),
-        RequestHandler
+        DashboardHandler
     )
 
     print(f"Server running on {HOST}:{PORT}", flush=True)
