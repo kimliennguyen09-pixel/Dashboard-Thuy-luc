@@ -174,12 +174,19 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    HOST = "0.0.0.0"
+    PORT = int(os.environ.get("PORT", "8000"))
 
-import os
+    server = ThreadingHTTPServer(
+        (HOST, PORT),
+        RequestHandler
+    )
 
-port = int(os.environ.get("PORT", "8000"))
-server = HTTPServer(("0.0.0.0", port), Handler)
+    print(f"Server running on {HOST}:{PORT}", flush=True)
 
-print(f"Dashboard running on port {port}")
-server.serve_forever()
+    try:
+        server.serve_forever()
+    except KeyboardInterrupt:
+        pass
+    finally:
+        server.server_close()
